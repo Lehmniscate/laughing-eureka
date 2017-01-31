@@ -7,10 +7,11 @@ class Display
     @board = board
   end
 
-  def input
+  def input(name)
     spaced = nil
     until spaced
       render
+      puts "#{name}, please make a move"
       spaced = @cursor.get_input
     end
     @cursor.cursor_pos
@@ -23,9 +24,10 @@ class Display
       (0..7).each do |j|
         piece = @board[[i,j]].to_s
         if @cursor.cursor_pos == [i,j]
-          piece = piece.colorize(color: :red, background: :light_black)
+          row << " #{piece} ".colorize(color: :red, background: :light_black)
+        else
+          row << " #{piece} "
         end
-        row << " #{piece} "
       end
       puts row
     end

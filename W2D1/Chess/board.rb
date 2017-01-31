@@ -88,6 +88,12 @@ class Board
     in_check?(color) && valid_moves(color).empty?
   end
 
+  def move_piece(start_pos, end_pos, color)
+    raise WrongColor unless self[start_pos].color == color
+    raise LosingMove if self[start_pos].move_into_check?(end_pos)
+    self.move_piece!(start_pos, end_pos)
+  end
+
   def move_piece!(start_pos, end_pos)
     raise NoPieceAtStartPosition if self[start_pos].is_a?(NullPiece)
     raise EndPositionNotValid unless self[start_pos].moves.include?(end_pos)
