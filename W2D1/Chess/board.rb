@@ -61,6 +61,32 @@ class Board
     danger_spots.include?(king_spot)
   end
 
+  def dup
+    dupped_board = Board.new
+    b = @board.map do |row|
+      row.map {|piece| piece.dup_with(dupped_board)}
+    end
+    dupped_board.board = b
+    dupped_board
+  end
+
+  def valid_moves(color)
+    moves = []
+
+    @board.each do |row|
+      row.each do |piece|
+        piece_moves = piece.moves if piece.color == color
+        moves += piece_moves.reject {|move| piece.move_into_check?(move)}
+      end
+    end
+
+    moves
+  end
+
+  def checkmate?(color)
+    in_check?(color) && valid_moves(color).empty?
+  end
+
   def move_piece(start_pos, end_pos)
     raise NoPieceAtStartPosition if self[start_pos].is_a?(NullPiece)
     raise EndPositionNotValid unless self[start_pos].moves.include?(end_pos)
@@ -68,5 +94,9 @@ class Board
     self[end_pos].position = end_pos
     self[start_pos] = NullPiece.instance
   end
+
+  private
+
+  attr_accessor :board
 
 end

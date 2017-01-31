@@ -38,11 +38,6 @@ class Pawn < Piece
     @color == :black ? [[1,0]] : [[-1,0]]
   end
 
-  def initialize(board, pos)
-    super
-    @start_pos = pos
-  end
-
   def to_s
     if @color == :white
       "\u2659".encode('utf-8')

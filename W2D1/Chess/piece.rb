@@ -5,6 +5,7 @@ class Piece
   def initialize(board, pos)
     @board = board
     @pos = pos
+    @start_pos = pos
     @color = pos.first < 4 ? :black : :white
   end
 
@@ -32,5 +33,15 @@ class Piece
   def position=(pos)
     @pos = pos
   end
+
+  def move_into_check?(end_pos)
+    #TODO dup board and perform move and check if in check?
+  end
+
+  def dup_with(new_board)
+    new_piece = self.class.new(new_board, @start_pos.dup)
+    new_piece.position = @pos.dup
+  end
+
 
 end
