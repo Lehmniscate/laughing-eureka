@@ -14,20 +14,27 @@ class Game
 
   def play
     color = :white
+
     until over?
       render
       take_turn(color)
       color = color == :white ? :black : :white
     end
+
+    render
+
     winner = @board.checkmate?(:black) ? @player_one : @player_two
     puts "#{winner.name} is the lesser loser"
   end
 
   def take_turn(color)
     name = color == :white ? @player_one.name : @player_two.name
+
     start_pos = @display.input(name)
     end_pos = @display.input(name)
+
     @board.move_piece(start_pos, end_pos, color)
+
     rescue WrongColor => e
       puts "Move your own piece"
       sleep 1
@@ -58,6 +65,7 @@ class Game
     puts "name?"
     HumanPlayer.new(gets.chomp,color)
   end
+  
 end
 
 if __FILE__ == $0

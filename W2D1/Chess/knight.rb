@@ -4,11 +4,7 @@ class Knight < Piece
   include SteppingPiece
 
   def to_s
-    if @color == :white
-      "\u2658".encode('utf-8')
-    else
-      "\u265E".encode('utf-8')
-    end
+    (@color==:white ? "\u2658" : "\u265E").encode('utf-8')
   end
 
   def move_dirs
