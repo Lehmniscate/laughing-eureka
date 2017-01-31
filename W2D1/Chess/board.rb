@@ -75,6 +75,7 @@ class Board
 
     @board.each do |row|
       row.each do |piece|
+        piece_moves = []
         piece_moves = piece.moves if piece.color == color
         moves += piece_moves.reject {|move| piece.move_into_check?(move)}
       end
@@ -87,15 +88,13 @@ class Board
     in_check?(color) && valid_moves(color).empty?
   end
 
-  def move_piece(start_pos, end_pos)
+  def move_piece!(start_pos, end_pos)
     raise NoPieceAtStartPosition if self[start_pos].is_a?(NullPiece)
     raise EndPositionNotValid unless self[start_pos].moves.include?(end_pos)
     self[end_pos] = self[start_pos]
     self[end_pos].position = end_pos
     self[start_pos] = NullPiece.instance
   end
-
-  private
 
   attr_accessor :board
 

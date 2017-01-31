@@ -35,12 +35,15 @@ class Piece
   end
 
   def move_into_check?(end_pos)
-    #TODO dup board and perform move and check if in check?
+    trial_board = @board.dup
+    trial_board.move_piece!(@pos, end_pos)
+    trial_board.in_check?(@color)
   end
 
   def dup_with(new_board)
     new_piece = self.class.new(new_board, @start_pos.dup)
     new_piece.position = @pos.dup
+    new_piece
   end
 
 
