@@ -30,19 +30,19 @@ class Game
     @board.move_piece(start_pos, end_pos, color)
     rescue WrongColor => e
       puts "Move your own piece"
-      STDIN.getch
+      sleep 1
       retry
     rescue NoPieceAtStartPosition => e
       puts "That was an empty space. Try again."
-      STDIN.getch
+      sleep 1
       retry
     rescue EndPositionNotValid => e
       puts "Something's wrong with your move"
-      STDIN.getch
+      sleep 1
       retry
     rescue LosingMove => e
       puts "Your King is more important than your whims"
-      STDIN.getch
+      sleep 1.5
       retry
   end
 

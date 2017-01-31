@@ -8,7 +8,9 @@ module SlidingPiece
       prev_pos = @pos
       next_pos = (0..1).map {|i| prev_pos[i] + direction[i]}
 
-      while valid_move?(next_pos)
+      enemy_found = false
+      while valid_move?(next_pos) && !enemy_found
+        enemy_found = true if @board[next_pos].enemy?(self)
         moves << next_pos
         next_pos = (0..1).map {|i| next_pos[i] + direction[i]}
       end

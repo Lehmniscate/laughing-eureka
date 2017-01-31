@@ -24,9 +24,13 @@ class Display
       (0..7).each do |j|
         piece = @board[[i,j]].to_s
         if @cursor.cursor_pos == [i,j]
-          row << " #{piece} ".colorize(color: :red, background: :light_black)
+          row << " #{piece} ".colorize(color: :red, background: :white)
         else
-          row << " #{piece} "
+          if (i + j) % 2 == 0
+            row << " #{piece} ".colorize(background: :light_white)
+          else
+            row << " #{piece} ".colorize(background: :light_black)
+          end
         end
       end
       puts row
