@@ -3,7 +3,7 @@ class Piece
   def initialize(board, pos)
     @board = board
     @pos = pos
-    @color = pos.last < 4 ? :black : :white
+    @color = pos.first < 4 ? :black : :white
   end
 
   def enemy?(other_piece)
@@ -11,7 +11,6 @@ class Piece
   end
 
   def moves
-
   end
 
   def to_s
@@ -21,6 +20,10 @@ class Piece
   def valid_move?(pos)
     pos.first.between?(0, 7) && pos.last.between?(0, 7) &&
       (@board[pos].is_a?(NullPiece) || @board[pos].enemy?(self))
+  end
+
+  def position=(pos)
+    @pos = pos
   end
 
   protected

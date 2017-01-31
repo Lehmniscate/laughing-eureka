@@ -10,7 +10,6 @@ require_relative "queen.rb"
 class Board
 
   BLANK_ROW = [:Rook, :Knight, :Bishop, :Queen, :King, :Bishop, :Knight, :Rook]
-  # BLANK_ROW = [:Piece] * 8
 
   def initialize
     @board = setup_board
@@ -50,9 +49,10 @@ class Board
 
   def move_piece(start_pos, end_pos)
     raise NoPieceAtStartPosition if self[start_pos].is_a?(NullPiece)
-    raise EndPositionNotValid unless self[start_pos].valid_move?(end_pos)
+    raise EndPositionNotValid unless self[start_pos].moves.include?(end_pos)
     self[end_pos] = self[start_pos]
-    self[start_pos] = NullPiece.new
+    self[end_pos].position = end_pos
+    self[start_pos] = NullPiece.instance
   end
 
 end

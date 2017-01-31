@@ -14,6 +14,7 @@ class Display
       render
       spaced = @cursor.get_input
     end
+    @cursor.cursor_pos
   end
 
   def render

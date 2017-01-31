@@ -8,7 +8,11 @@ class Bishop < Piece
   end
 
   def to_s
-    "B"
+    if @color == :white
+      "\u2657".encode('utf-8')
+    else
+      "\u265D".encode('utf-8')
+    end
   end
 
 end

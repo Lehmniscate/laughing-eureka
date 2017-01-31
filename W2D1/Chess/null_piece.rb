@@ -7,6 +7,10 @@ class NullPiece < Piece
   def initialize
   end
 
+  def enemy?(other_piece)
+    false
+  end
+
   def to_s
     " "
   end
