@@ -10,20 +10,20 @@ class Pawn < Piece
 
     until potential_moves.empty?
       move = potential_moves.shift
-      next_pos = (0..1).map {|i| @pos[i] + move[i]}
+      next_pos = add_position(@pos, move)
 
       if self.in_bounds?(next_pos) && @board[next_pos].is_a?(NullPiece)
         moves << next_pos
         if first_loop && @pos == @start_pos
           first_loop = false
-          potential_moves << (0..1).map { |i| move[i] * 2 }
+          potential_moves << add_position(move, move)
         end
       end
 
     end
 
     diagonals.each do |move|
-      next_pos = (0..1).map {|i| @pos[i] + move[i]}
+      next_pos = add_position(@pos, move)
       moves << next_pos if self.in_bounds?(next_pos) && @board[next_pos].enemy?(self)
     end
 

@@ -4,7 +4,7 @@ module SteppingPiece
     moves = []
 
     directions.each do |direction|
-      next_pos = (0..1).map {|i| @pos[i] + direction[i]}
+      next_pos = add_position(@pos, direction)
       moves << next_pos if valid_move?(next_pos)
     end
 
