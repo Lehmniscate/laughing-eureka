@@ -5,15 +5,28 @@ class Pawn < Piece
   def moves
     moves = []
 
-    directions = (@pos == @start_pos ? first_move_dirs : move_dirs)
+    potential_moves = move_dirs
+    first_loop = true
+
+    until potential_moves.empty?
+      move = potential_moves.shift
+      next_pos = (0..1).map {|i| @pos[i] + move[i]}
+
+      if self.in_bounds?(next_pos) && @board[next_pos].is_a?(NullPiece)
+        moves << next_pos
+        if first_loop && @pos == @start_pos
+          first_loop = false
+          potential_moves << (0..1).map { |i| move[i] * 2 }
+        end
+      end
+
+    end
+
     diagonals.each do |move|
       next_pos = (0..1).map {|i| @pos[i] + move[i]}
-      moves << next_pos if @board[next_pos].enemy?(self)
+      moves << next_pos if self.in_bounds?(next_pos) && @board[next_pos].enemy?(self)
     end
-    directions.each do |direction|
-      next_pos = (0..1).map {|i| @pos[i] + direction[i]}
-      moves << next_pos if valid_move?(next_pos)
-    end
+
     moves
   end
 
@@ -23,10 +36,6 @@ class Pawn < Piece
 
   def move_dirs
     @color == :black ? [[1,0]] : [[-1,0]]
-  end
-
-  def first_move_dirs
-    @color == :black ? [[1,0],[2,0]] : [[-1,0],[-2,0]]
   end
 
   def initialize(board, pos)

@@ -1,5 +1,7 @@
 class Piece
 
+  attr_reader :color
+
   def initialize(board, pos)
     @board = board
     @pos = pos
@@ -11,6 +13,7 @@ class Piece
   end
 
   def moves
+    []
   end
 
   def to_s
@@ -18,16 +21,16 @@ class Piece
   end
 
   def valid_move?(pos)
-    pos.first.between?(0, 7) && pos.last.between?(0, 7) &&
+    self.in_bounds?(pos) &&
       (@board[pos].is_a?(NullPiece) || @board[pos].enemy?(self))
+  end
+
+  def in_bounds?(pos)
+    pos.first.between?(0, 7) && pos.last.between?(0, 7)
   end
 
   def position=(pos)
     @pos = pos
   end
-
-  protected
-
-  attr_reader :color
 
 end

@@ -47,6 +47,20 @@ class Board
     pos.first.between?(0, 7) && pos.last.between?(0, 7)
   end
 
+  def in_check?(color)
+    danger_spots = []
+    king_spot = nil
+
+    @board.each_with_index do |row, i|
+      row.each_with_index do |piece, j|
+        king_spot = [i, j] if piece.is_a?(King) && piece.color == color
+        danger_spots += piece.moves if piece.color != color
+      end
+    end
+
+    danger_spots.include?(king_spot)
+  end
+
   def move_piece(start_pos, end_pos)
     raise NoPieceAtStartPosition if self[start_pos].is_a?(NullPiece)
     raise EndPositionNotValid unless self[start_pos].moves.include?(end_pos)
