@@ -84,6 +84,8 @@ class Cursor
       return nil
     when :ctrl_c
       Process.exit
+    else
+      nil
     end
   end
 

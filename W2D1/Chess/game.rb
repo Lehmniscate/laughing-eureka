@@ -32,7 +32,6 @@ class Game
 
     start_pos = @display.input(name)
     end_pos = @display.input(name)
-
     @board.move_piece(start_pos, end_pos, color)
 
     rescue WrongColor => e
@@ -65,7 +64,7 @@ class Game
     puts "name?"
     HumanPlayer.new(gets.chomp,color)
   end
-  
+
 end
 
 if __FILE__ == $0
