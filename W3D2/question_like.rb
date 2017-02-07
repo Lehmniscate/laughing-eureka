@@ -1,6 +1,11 @@
-class QuestionLike
+require_relative "modelbase"
+
+class QuestionLike < ModelBase
+  TABLE = "question_likes"
+
   attr_reader :id
   attr_accessor :user_id, :question_id
+  
   def initialize(options)
     @id = options['id']
     @user_id, @question_id = options['user_id'], options['question_id']
@@ -72,13 +77,4 @@ class QuestionLike
     data.map {|datum| User.new(datum)}
   end
 
-  def self.find_by_id(id)
-    data = QuestionsDatabase.instance.execute(<<-SQL, id)
-      SELECT *
-      FROM question_likes
-      WHERE id = ?
-    SQL
-    return nil if data.empty?
-    QuestionLike.new(data.first)
-  end
 end
