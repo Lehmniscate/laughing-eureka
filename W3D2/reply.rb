@@ -15,13 +15,7 @@ class Reply < ModelBase
   end
 
   def child_replies
-    data = QuestionsDatabase.instance.execute(<<-SQL, @id)
-      SELECT *
-      FROM replies
-      WHERE parent_reply_id = ?
-    SQL
-    return nil if data.empty?
-    data.map { |datum| Reply.new(datum) }
+    Reply.find_by_parent_reply_id(@id)
   end
 
   def parent_reply

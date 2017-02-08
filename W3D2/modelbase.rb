@@ -1,3 +1,4 @@
+require "byebug"
 class ModelBase
 
   def self.find_by_id(id)
@@ -28,7 +29,7 @@ class ModelBase
       question_marks = ['?'] * var_values.length
       QuestionsDatabase.instance.execute(<<-SQL, var_values)
         INSERT INTO
-          #{self::TABLE} (#{var_names.join(", ")})
+          #{self.class::TABLE} (#{var_names.join(", ")})
         VALUES
           ( #{question_marks.join(", ")} )
       SQL
@@ -38,7 +39,7 @@ class ModelBase
       var_values = var_values[1..-1] + [var_values[0]]
       QuestionsDatabase.instance.execute(<<-SQL, var_values)
         UPDATE
-          #{self::TABLE}
+          #{self.class::TABLE}
         SET
           #{var_names.join(", ")}
         WHERE
@@ -50,7 +51,7 @@ class ModelBase
   def self.where(options)
     var_names = options
     arguments = nil
-    
+
     unless options.is_a?(String)
       var_names = options.keys.map {|key| key.to_s + " LIKE ?"}.join(" AND ")
       arguments = options.values.map {|value| "%#{value}%"}
@@ -80,6 +81,21 @@ class ModelBase
     end
 
     self.where(options)
+  end
+
+  def self.create(*args)
+    p args
+    dummy = new({})
+    vars = dummy.instance_variables
+    p vars
+    vars.shift
+    p vars
+    options = Hash.new
+    vars.each_with_index do |key, i|
+      options[key.to_s[1..-1]] = args[i]
+    end
+    p options
+    new(options)
   end
 
 end

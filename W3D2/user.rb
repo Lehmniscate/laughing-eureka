@@ -48,14 +48,7 @@ class User < ModelBase
   end
 
   def self.find_by_name(fname, lname)
-    data = QuestionsDatabase.instance.execute(<<-SQL, fname, lname)
-      SELECT *
-      FROM users
-      WHERE fname = ?
-      AND lname = ?
-    SQL
-    return nil if data.empty?
-    User.new(data.first)
+    User.find_by_fname_and_lname(fname, lname)
   end
 
   def followed_questions
