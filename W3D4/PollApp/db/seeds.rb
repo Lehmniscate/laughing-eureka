@@ -43,3 +43,8 @@ poll2_answers.each do |answer|
   Response.create!(user_id: users[3].id, answer_choice_id: answer[0].id)
   Response.create!(user_id: users[4].id, answer_choice_id: answer[0].id)
 end
+
+
+q = Question.create(poll_id: Poll.first.id, text: "Test Question!???")
+c = (1..4).map {|i| AnswerChoice.create(question_id: q.id, text: "This is the answer number #{i}") }
+ r = (1..12).map {|i| Response.create(user_id: User.all[2+i].id, answer_choice_id: c.drop(1).sample.id)}

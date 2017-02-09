@@ -26,4 +26,12 @@ class Question < ActiveRecord::Base
     through: :answer_choices,
     source: :responses
 
+  def results
+    AnswerChoice.joins(:question)
+    .joins("LEFT JOIN responses ON answer_choices.id  = responses.answer_choice_id")
+    .where("questions.id = ?", self.id)
+    .group(:id)
+    .pluck(:text, "COUNT(responses.id) AS count").to_h
+  end
+
 end
