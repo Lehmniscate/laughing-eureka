@@ -12,6 +12,7 @@
 class Response < ActiveRecord::Base
   validates :user_id, :answer_choice_id, presence: true
   validate :not_duplicate_response
+  validate :not_own_poll
 
   belongs_to :respondent,
     primary_key: :id,
@@ -28,6 +29,12 @@ class Response < ActiveRecord::Base
     source: :question
 
   private
+
+  def not_own_poll
+    if question.poll.author.id == user_id
+      errors[:Respondent] << "cannot respond to self-authored poll"
+    end
+  end
 
   def not_duplicate_response
     if respondent_already_answered?
