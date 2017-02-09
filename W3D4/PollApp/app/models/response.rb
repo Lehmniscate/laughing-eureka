@@ -10,6 +10,7 @@
 #
 
 class Response < ActiveRecord::Base
+  validates :user_id, :answer_choice_id, presence: true
 
   belongs_to :respondent,
     primary_key: :id,
@@ -20,5 +21,17 @@ class Response < ActiveRecord::Base
     primary_key: :id,
     foreign_key: :answer_choice_id,
     class_name: :AnswerChoice
+
+  has_one :question,
+    through: :answer_choice,
+    source: :question
+
+  def respondent_already_answered?
+    sibling_responses
+  end
+
+  def sibling_responses
+    question.responses.where.not(id: id)
+  end
 
 end

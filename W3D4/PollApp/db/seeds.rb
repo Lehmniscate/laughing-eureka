@@ -31,7 +31,7 @@ poll1_answers.each do |answer|
   Response.create!(user_id: users[5].id, answer_choice_id: answer[0].id)
 end
 
-poll1_answers.each do |answer|
+poll2_answers.each do |answer|
   Response.create!(user_id: users[1].id, answer_choice_id: answer[1].id)
   Response.create!(user_id: users[2].id, answer_choice_id: answer[0].id)
   Response.create!(user_id: users[3].id, answer_choice_id: answer[0].id)
