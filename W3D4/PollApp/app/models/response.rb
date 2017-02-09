@@ -11,6 +11,7 @@
 
 class Response < ActiveRecord::Base
   validates :user_id, :answer_choice_id, presence: true
+  validate :not_duplicate_response
 
   belongs_to :respondent,
     primary_key: :id,
@@ -26,8 +27,16 @@ class Response < ActiveRecord::Base
     through: :answer_choice,
     source: :question
 
+  private
+
+  def not_duplicate_response
+    if respondent_already_answered?
+      errors[:Respondent] << "has already answered this question"
+    end
+  end
+
   def respondent_already_answered?
-    sibling_responses
+    sibling_responses.where(user_id: user_id).exists?
   end
 
   def sibling_responses

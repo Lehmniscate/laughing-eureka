@@ -6,6 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.all.delete_all
+Poll.all.delete_all
+Question.all.delete_all
+AnswerChoice.all.delete_all
+Response.all.delete_all
+
 users = ('a'..'z').map {|sn| User.create!(user_name: "#{sn} user")}
 
 polls = (1..2).map {|poll| Poll.create!(title: poll.to_s, user_id: users.first.id)}
@@ -18,7 +24,7 @@ poll1_answers = poll1_questions.map do |q|
     AnswerChoice.create!(question_id: q.id, text: 'no')]
 end
 
-poll2_answers = poll1_questions.map do |q|
+poll2_answers = poll2_questions.map do |q|
   [AnswerChoice.create!(question_id: q.id, text: 'yes'),
     AnswerChoice.create!(question_id: q.id, text: 'no')]
 end

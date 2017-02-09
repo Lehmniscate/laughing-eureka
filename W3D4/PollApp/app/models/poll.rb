@@ -10,8 +10,8 @@
 #
 
 class Poll < ActiveRecord::Base
-  validates :user_id, presence: true, uniqueness: true
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness: true
+  validates :user_id, presence: true
 
   belongs_to :author,
     primary_key: :id,
