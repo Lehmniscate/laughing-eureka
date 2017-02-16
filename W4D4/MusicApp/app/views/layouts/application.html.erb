@@ -10,11 +10,16 @@
 
   <body>
 
+    <header>
+      <a href="<%= bands_url %>">Home</a>
+    </header>
+
     <%= yield %>
 
     <footer>
       <% if logged_in? %>
-        <%= button_to "Log Out", session_url, method: :delete %>
+      <%= current_user.username %>
+      <%= link_to "Log Out", session_url, method: :delete %>
       <% end %>
     </footer>
   </body>

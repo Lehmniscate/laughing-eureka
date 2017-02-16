@@ -1,0 +1,18 @@
+<% render "shared/errors" %>
+<form class="band" action="<%= @band.nil? ? bands_url : band_url(@band.id) %>" method="post">
+  <%= auth_token %>
+  <% unless @band.nil? %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <label for="name">
+    <input id="name"
+      type="text"
+      name="band[name]"
+      value="<%= @band.nil? ? "" : @band.name %>">
+  </label>
+
+  <input
+    type="submit"
+    value="<%= @band.nil? ? "add" : "submit changes" %>">
+</form>
