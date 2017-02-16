@@ -12,7 +12,8 @@
 #
 
 class Track < ApplicationRecord
-  validates_presence_of :album, :name, :bonus
+  validates_presence_of :album, :name
+  validates :bonus, inclusion: {in: [true, false]}
 
   belongs_to :album
   has_one :band, through: :album, source: :band

@@ -1,0 +1,47 @@
+<%= render "shared/errors" %>
+<form class="track" action="<%= @action=="new" ? tracks_url : track_url(@track.id) %>" method="post">
+  <%= auth_token %>
+  <% if @action == "edit" %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <label for="name">Track name</label>
+  <input id="name"
+    type="text"
+    name="track[name]"
+    value="<%= @track.nil? ? "" : @track.name %>">
+
+  <br>
+
+  <label for="album">Album</label>
+  <select id="album" name="track[album_id]">
+    <% Album.all.each do |album| %>
+      <option value=<%= album.id %>
+        <%= album.id == @album_id.to_i ? "selected" : "" %>><%= album.name %></option>
+    <% end %>
+  </select>
+
+  <br>
+
+  <input <%= (!@track.nil? && @track.bonus) ? "checked" : "" %>
+    type="radio"
+    name="track[bonus]"
+    value=<%= true %>>Bonus</input>
+  <input <%= (@track.nil? || !@track.bonus) ? "checked" : "" %>
+    type="radio"
+    name="track[bonus]"
+    value=<%= false %>>Regular</input>
+
+  <br>
+
+  <textarea
+    name="track[lyrics]"
+    rows="20" 
+    cols="80"><%= @track.nil? ? "" : @track.lyrics %></textarea>
+
+  <br>
+
+  <input
+    type="submit"
+    value="<%= @action == "new" ? "add" : "submit changes" %>">
+</form>

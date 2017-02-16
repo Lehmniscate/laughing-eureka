@@ -1,0 +1,18 @@
+<h2><%= @track.name %></h2>
+
+<%= link_to "Edit Track", edit_track_url(@track.id), method: :get %>
+<%= link_to "Delete Track", track_url(@track.id), method: :delete %>
+<br>
+<br>
+
+<%= @track.bonus ? "bonus" : "standard" %>
+
+<br>
+<br>
+
+<%= @track.lyrics.split("\n").map {|i| h(i)}.join("<br>").html_safe %>
+
+<br>
+<br>
+
+In album <%= link_to "#{@track.album.name}", album_url(@track.album_id), method: :get%>
