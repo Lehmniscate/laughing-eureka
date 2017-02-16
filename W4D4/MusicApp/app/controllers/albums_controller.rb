@@ -5,30 +5,35 @@ class AlbumsController < ApplicationController
   end
 
   def new
+    @band_id = params[:band_id]
     render :new
   end
 
   def create
-    @album = Album.new(album_params)
-    @album.band_id = params[:band_id]
+    album = Album.new(album_params)
 
-    if @album.save
-      redirect_to album_url(@album.id)
+    if album.save
+      redirect_to album_url(album.id)
     else
-      flash.now[:errors] = @album.errors.full_messages
+      flash.now[:errors] = album.errors.full_messages
       render :new
     end
   end
 
   def edit
-    render :edit
+    @album = Album.find_by(id: params[:id])
+    if @album.nil?
+      redirect_to bands_url
+    else
+      @band_id = @album.band_id
+      render :edit
+    end
   end
 
   def update
-    @album = Album.new(album_params)
-    @album.id = params[:id]
+    @album = Album.find_by(id: params[:id])
 
-    if @album.save
+    if @album.update(album_params)
       redirect_to album_url(@album.id)
     else
       flash.now[:errors] = @album.errors.full_messages

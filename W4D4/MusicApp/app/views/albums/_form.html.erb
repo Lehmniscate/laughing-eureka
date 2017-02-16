@@ -1,0 +1,41 @@
+<%= render "shared/errors" %>
+<form class="album" action="<%= @album.nil? ? albums_url : album_url(@album.id) %>" method="post">
+  <%= auth_token %>
+  <% unless @album.nil? %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <label for="name">Album name</label>
+  <input id="name"
+    type="text"
+    name="album[name]"
+    value="<%= @album.nil? ? "" : @album.name %>">
+
+  <br>
+
+  <label for="band">Band</label>
+  <select id="band" name="album[band_id]">
+    <% Band.all.each do |band| %>
+      <option value=<%= band.id %>
+        "<%= band.id == @band_id ? "checked" : "" %>"><%= band.name %></option>
+    <% end %>
+  </select>
+
+  <br>
+
+  <label for="live">Produced</label>
+  <input id="live" <%= (!@album.nil? && @album.live) ? "checked" : "" %>
+    type="radio"
+    name="album[live]"
+    value=<%= true %>>Live</input>
+  <input id="live" <%= (@album.nil? || !@album.live) ? "checked" : "" %>
+    type="radio"
+    name="album[live]"
+    value=<%= false %>>Studio</input>
+
+  <br>
+
+  <input
+    type="submit"
+    value="<%= @album.nil? ? "add" : "submit changes" %>">
+</form>

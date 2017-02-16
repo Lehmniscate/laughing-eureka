@@ -11,7 +11,8 @@
 #
 
 class Album < ApplicationRecord
-  validates_presence_of :band, :name, :live
+  validates_presence_of :band, :name
+  validates :live, inclusion: {in: [true, false]}
 
   belongs_to :band
   has_many :tracks, dependent: :destroy
