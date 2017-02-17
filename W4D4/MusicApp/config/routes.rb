@@ -8,5 +8,8 @@ Rails.application.routes.draw do
   resources :albums, only: [:show, :create, :edit, :update, :destroy] do
     resources :tracks, only: [:new]
   end
-  resources :tracks, only: [:show, :create, :edit, :update, :destroy]
+  resources :tracks, only: [:show, :create, :edit, :update, :destroy] do
+    resources :notes, only: [:create]
+  end
+  resources :notes, only: [:destroy]
 end

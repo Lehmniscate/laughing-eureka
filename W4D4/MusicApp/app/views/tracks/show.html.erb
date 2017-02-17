@@ -15,4 +15,15 @@
 <br>
 <br>
 
+<%= render @track.notes.where(user_id: current_user.id) %>
+
+<form class="note" action="<%= track_notes_url(@track.id) %>" method="post">
+  <%= auth_token %>
+  <textarea name="note[note]" rows="8" cols="80"></textarea>
+  <input type="submit" value="Write note">
+</form>
+
+<br>
+<br>
+
 In album <%= link_to "#{@track.album.name}", album_url(@track.album_id), method: :get%>

@@ -17,6 +17,8 @@ class User < ApplicationRecord
 
   before_validation :ensure_session_token
 
+  has_many :notes
+
   def self.find_by_credentials(username, password)
     user = find_by(username: username)
     return nil if user.nil?
