@@ -1,0 +1,35 @@
+ul {
+  list-style: none;
+}
+
+.grid {
+  width: 300px;
+  border-color: black;
+}
+
+.grid > li {
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  width: 98px;
+  height: 98px;
+  float: left;
+  font-size: 80px;
+  text-align: center;
+}
+
+.emptySquare {
+  background-color: gray;
+}
+
+.emptySquare:hover {
+  background-color: yellow;
+}
+
+.x {
+  background-color: red;
+}
+
+.o {
+  background-color: blue;
+}
