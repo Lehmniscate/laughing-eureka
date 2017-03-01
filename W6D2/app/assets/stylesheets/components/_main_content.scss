@@ -1,0 +1,17 @@
+.col ul {
+  list-style: disc;
+}
+
+.col h1 {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.col-1-1 h1 {
+  font-size: 24px;
+  font-style: italic;
+}
+
+.col h1:hover {
+  text-decoration: underline;
+}
