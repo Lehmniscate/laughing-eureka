@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="lib/jquery_lite.js"></script>
+    <title>Testing JQuery Lite!</title>
+  </head>
+  <body>
+
+    <div class="test">
+      <a href="#" style="text-decoration: none">This is a link!</a>
+    </div>
+
+    <div>
+      <a class="turn-off-link" href="#">Another link!</a>
+    </div>
+
+    <script type="text/javascript">
+    $l(() => {
+      $l(".test").children().on('click', (event) => {
+        event.preventDefault();
+
+        if($l(event.target).attr("style") === "color:red") {
+          $l(event.target).attr("style", "color:yellow");
+        } else {
+          $l(event.target).attr("style", "color:red");
+        }
+
+        return false;
+      });
+
+      $l('.turn-off-link').on('click', event => {
+        event.preventDefault();
+
+        $l('.test').children().off('click');
+        $l(event.target).parent().remove();
+        return false;
+      });
+    });
+    $l(() => console.log("loaded the page!"));
+    $l(() => {
+      $l.ajax({
+        type: 'GET',
+        url: "http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=bcb83c4b54aee8418983c2aff3073b3b",
+        success(data) {
+          console.log("We have your weather!")
+          console.log(data);
+        },
+        error() {
+          console.error("An error occurred.");
+        },
+      });
+    });
+    </script>
+
+  </body>
+</html>
