@@ -1,0 +1,14 @@
+.tile {
+  width: 20px;
+  height: 20px;
+  background-color: gray;
+  border: 1px solid black;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+}
