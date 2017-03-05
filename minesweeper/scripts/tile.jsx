@@ -1,14 +1,27 @@
 import React from 'react';
 
-export default class Tile extends React.Component {
-  handleClick() {
-    this.props.update(this.props.tile.pos);
-  }
+export const Tile = ({tile, update}) => {
+  let tileClass = "";
+  let tileText = "";
+  let onclick = (e) => update(tile.pos, e);
+  let onrightclick = (e) => update(tile.pos, e, true);
 
-  render() {
-    const { pos } = this.props.tile;
-    return (
-      <div className="tile" key={pos.join(",")} onClick={this.handleClick.bind(this)}>T</div>
-    )
+  if (tile.explored) {
+    let bombCount = tile.adjacentBombCount();
+    if (bombCount > 0)
+      tileText = bombCount;
+    tileClass = " revealed";
+    onclick = (e) => {
+      e.preventDefault();
+      return false;
+    };
+    onrightclick = onclick;
   }
+  if (tile.flagged)
+    tileClass = " flagged";
+  return (
+    <div className={`tile${tileClass}`} onClick={(e) => update(tile.pos, e)} onContextMenu={(e) => update(tile.pos, e, true)}>
+      {tileText}
+    </div>
+  )
 }
