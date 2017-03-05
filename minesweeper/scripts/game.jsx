@@ -41,13 +41,22 @@ export default class Game extends React.Component {
         alert("You won!");
         this.resetGame();
       }, 200);
+      this.revealBoard();
     } else if (board.lost()) {
       setTimeout(() => {
         alert("You lost!");
         this.resetGame();
       }, 200);
+      this.revealBoard();
     }
     return false;
+  }
+
+  revealBoard() {
+    this.state.board.grid.forEach(row => {
+      row.forEach(tile => tile.explored = true);
+    });
+    this.setState({board: this.state.board});
   }
 
   resetGame() {

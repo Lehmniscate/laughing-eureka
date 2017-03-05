@@ -16,6 +16,10 @@ export const Tile = ({tile, update}) => {
       return false;
     };
     onrightclick = onclick;
+    if (tile.bombed) {
+      tileText = "*";
+      tileClass = " bombed";
+    }
   }
   if (tile.flagged)
     tileClass = " flagged";

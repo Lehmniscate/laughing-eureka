@@ -9518,13 +9518,25 @@ var Game = function (_React$Component) {
           alert("You won!");
           _this2.resetGame();
         }, 200);
+        this.revealBoard();
       } else if (board.lost()) {
         setTimeout(function () {
           alert("You lost!");
           _this2.resetGame();
         }, 200);
+        this.revealBoard();
       }
       return false;
+    }
+  }, {
+    key: 'revealBoard',
+    value: function revealBoard() {
+      this.state.board.grid.forEach(function (row) {
+        row.forEach(function (tile) {
+          return tile.explored = true;
+        });
+      });
+      this.setState({ board: this.state.board });
     }
   }, {
     key: 'resetGame',
@@ -9840,6 +9852,10 @@ var Tile = exports.Tile = function Tile(_ref) {
       return false;
     };
     onrightclick = onclick;
+    if (tile.bombed) {
+      tileText = "*";
+      tileClass = " bombed";
+    }
   }
   if (tile.flagged) tileClass = " flagged";
   return _react2.default.createElement(
