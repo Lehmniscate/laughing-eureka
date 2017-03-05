@@ -9478,10 +9478,15 @@ var Game = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this));
 
     _this.state = {
-      board: new Minesweeper.Board(20, 40)
+      board: new Minesweeper.Board(20, 40),
+      time: 0,
+      boardSize: 20,
+      numBombs: 40
     };
     _this.updateGame = _this.updateGame.bind(_this);
     _this.newGame = _this.newGame.bind(_this);
+    _this.chSize = _this.chSize.bind(_this);
+    _this.chNBombs = _this.chNBombs.bind(_this);
     return _this;
   }
 
@@ -9489,20 +9494,54 @@ var Game = function (_React$Component) {
     key: 'newGame',
     value: function newGame(e) {
       e.preventDefault();
-      this.setState({
-        board: new Minesweeper.Board(20, 40)
-      });
+      this.resetGame();
       return false;
     }
   }, {
     key: 'updateGame',
     value: function updateGame(pos, e) {
+      var _this2 = this;
+
       var flag = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
       e.preventDefault();
-      if (flag) this.state.board.grid[pos[0]][pos[1]].toggleFlag();else this.state.board.grid[pos[0]][pos[1]].explore();
-      this.setState({ board: this.state.board });
+      var board = this.state.board;
+
+
+      if (flag) board.grid[pos[0]][pos[1]].toggleFlag();else board.grid[pos[0]][pos[1]].explore();
+
+      this.setState({ board: board });
+      this.render();
+
+      if (board.won()) {
+        setTimeout(function () {
+          alert("You won!");
+          _this2.resetGame();
+        }, 200);
+      } else if (board.lost()) {
+        setTimeout(function () {
+          alert("You lost!");
+          _this2.resetGame();
+        }, 200);
+      }
       return false;
+    }
+  }, {
+    key: 'resetGame',
+    value: function resetGame() {
+      this.setState({
+        board: new Minesweeper.Board(this.state.boardSize, this.state.numBombs)
+      });
+    }
+  }, {
+    key: 'chSize',
+    value: function chSize(e) {
+      this.setState({ boardSize: e.target.value });
+    }
+  }, {
+    key: 'chNBombs',
+    value: function chNBombs(e) {
+      this.setState({ numBombs: e.target.value });
     }
   }, {
     key: 'render',
@@ -9512,9 +9551,33 @@ var Game = function (_React$Component) {
         { className: 'game' },
         _react2.default.createElement(_board.Board, { board: this.state.board, update: this.updateGame }),
         _react2.default.createElement(
-          'button',
-          { 'class': 'btn', onClick: this.newGame },
-          'New Game'
+          'div',
+          { className: 'settings' },
+          _react2.default.createElement(
+            'div',
+            { className: 'input' },
+            _react2.default.createElement(
+              'div',
+              { className: 'inputLabel' },
+              'Board Size'
+            ),
+            _react2.default.createElement('input', { className: 'inputText', onChange: this.chSize, value: this.state.boardSize })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'input' },
+            _react2.default.createElement(
+              'div',
+              { className: 'inputLabel' },
+              'Number of Bombs'
+            ),
+            _react2.default.createElement('input', { className: 'inputText', onChange: this.chNBombs, value: this.state.numBombs })
+          ),
+          _react2.default.createElement(
+            'button',
+            { className: 'btn', onClick: this.newGame },
+            'New Game'
+          )
         )
       );
     }

@@ -39,3 +39,13 @@ h1 {
 .revealed {
   background-color: white;
 }
+
+.settings {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  display: flex;
+  justify-content: space-between;
+}
