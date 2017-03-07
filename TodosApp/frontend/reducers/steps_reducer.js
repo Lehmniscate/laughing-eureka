@@ -19,7 +19,6 @@ const InitialState = {
 };
 
 const stepsReducer = (state = InitialState, action) => {
-  console.log("stepsReducer");
   switch(action.type) {
     case RECEIVE_STEPS:
       let newState = {};
