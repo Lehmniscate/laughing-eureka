@@ -3,7 +3,8 @@ export const allTodos = ( {todos} ) => {
 };
 
 export const stepsByTodoId = ( {steps}, todoId ) => {
+  console.log(todoId);
   return Object.keys(steps)
-    .filter( id => steps[id].todoId !== todoId)
+    .filter( id => steps[id].todoId === todoId)
     .map(id => steps[id]);
 };

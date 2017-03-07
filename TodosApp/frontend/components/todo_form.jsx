@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
 
+import FlatButton  from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+
+
+const style = {
+  marginRight: 20,
+};
+
 class TodoForm extends Component {
   constructor(props){
     super(props);
@@ -37,14 +47,13 @@ class TodoForm extends Component {
   render(){
     return (
       <div>
-        <input onChange={this.onChangeTitle} value={this.state.title} placeholder="Enter a title for your Todo">
-
-        </input>
-        <input onChange={this.onChangeBody} value={this.state.body}
-          placeholder="Enter description of the Todo">
-
-        </input>
-        <button onClick={this.addItem}>Add Todo</button>
+        <TextField onChange={this.onChangeTitle} value={this.state.title}
+        hintText="Enter a title for your Todo"/>
+        <TextField onChange={this.onChangeBody} value={this.state.body}
+        hintText="Enter description of the Todo"/>
+      <FloatingActionButton onClick={this.addItem} style={style} mini={true}>
+      <ContentAdd />
+      </FloatingActionButton>
       </div>
     );
   }

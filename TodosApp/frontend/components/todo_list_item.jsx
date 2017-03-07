@@ -1,6 +1,8 @@
 import React, { Component} from 'react';
 import TodoDetailView from './todo_detail_view_container.jsx';
 
+import FlatButton  from 'material-ui/FlatButton';
+
 class TodoListItem extends Component {
   constructor(props) {
     super(props);
@@ -34,12 +36,18 @@ class TodoListItem extends Component {
        }
      };
     return (
-      <li>
-        <a onClick={this.detailedView.bind(this)}>{this.props.todo.title}</a>
-        {detailedView()}
-        <button onClick={this.done.bind(this)}>
-          {this.props.todo.done ? "Undo" : "Done"}
-        </button>
+      <li className="todo-list-item">
+        <div className="todo-list-title">
+          <a onClick={this.detailedView.bind(this)}>
+            {this.props.todo.title}
+          </a>
+          <FlatButton
+            label={this.props.todo.done ? "Undo" : "Done"}
+            onClick={this.done.bind(this)} primary={true}/>
+        </div>
+        <div className="todo-list-details">
+          {detailedView()}
+        </div>
       </li>
     );
   }

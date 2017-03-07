@@ -1,5 +1,8 @@
 import React, { Component} from 'react';
 import StepListContainer from './step_list/step_list_container.jsx';
+
+import FlatButton  from 'material-ui/FlatButton';
+
 class TodoDetailView extends Component {
 
 
@@ -7,10 +10,9 @@ class TodoDetailView extends Component {
     return (
       <div>
         <span>{this.props.todo.body}</span>
-        <button onClick={(e) => this.props.removeTodo(this.props.todo)}>
-          Delete Todo
-        </button>
-        <StepListContainer todo_id={this.props.todo.id} />
+        <FlatButton onClick={(e) => this.props.removeTodo(this.props.todo)}
+          label="Delete Todo" secondary={true}/>
+        <StepListContainer todoId={this.props.todo.id} />
       </div>
     );
   }

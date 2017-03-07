@@ -1,12 +1,12 @@
 import React from 'react';
 import TodoListContainer from './todo_list_container.jsx';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const App = () => {
   return (
-    <div>
-      <h1> Todo App</h1>
+    <MuiThemeProvider>
       <TodoListContainer />
-    </div>
+    </MuiThemeProvider>
   );
 };
 

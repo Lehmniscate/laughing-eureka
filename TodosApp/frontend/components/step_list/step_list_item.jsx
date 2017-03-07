@@ -1,4 +1,6 @@
 import React, { Component} from 'react';
+import FlatButton  from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
 
 class StepListItem extends Component {
   constructor(props) {
@@ -19,16 +21,16 @@ class StepListItem extends Component {
 
 
  render() {
-   console.log(this.props.step);
     return(
       <div>
         <p>{this.props.step.title}</p>
-        <button onClick={(e) => this.props.removeStep(this.props.step)}>
-          Delete Step
-        </button>
-        <button onClick={this.done.bind(this)}>
-          {this.props.step.done ? "Undo" : "Done"}
-        </button>
+        <FlatButton onClick={(e) => this.props.removeStep(this.props.step)}
+          label="Delete Step"
+          secondary={true}/>
+
+        <FlatButton onClick={this.done.bind(this)}
+          label={this.props.step.done ? "Undo" : "Done"}
+          secondary={true} />
       </div>
     );
   }

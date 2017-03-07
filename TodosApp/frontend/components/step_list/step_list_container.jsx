@@ -4,9 +4,9 @@ import { stepsByTodoId } from '../../reducers/selectors.js';
 import { receiveStep } from '../../actions/step_actions.js';
 
 
-const mapStateToProps = (state, { todo_id }) => ({
-  steps: stepsByTodoId(state, todo_id),
-  todo_id
+const mapStateToProps = (state, { todoId }) => ({
+  steps: stepsByTodoId(state, todoId),
+  todoId
 });
 
 const mapDispatchToProps = dispatch => ({

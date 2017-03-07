@@ -1,0 +1,26 @@
+body {
+  width: 800px;
+  margin: auto;
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+  cursor: pointer;
+}
+
+.todo-list-container {
+  width: 800px;
+}
+
+.todo-list-item {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.todo-list-title {
+  width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -1,4 +1,15 @@
 import React, { Component } from 'react';
+import FlatButton  from 'material-ui/FlatButton';
+import TextField from 'material-ui/TextField';
+
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+
+
+const style = {
+  marginRight: 20,
+};
+
 
 class StepForm extends Component {
   constructor(props){
@@ -19,8 +30,10 @@ class StepForm extends Component {
 
   addItem(e) {
     e.preventDefault();
+    console.log(this.props.todoId);
     this.props.receiveStep({
       id: this.uniqueId(),
+      todoId: this.props.todoId,
       title: this.state.title,
       done: false
     });
@@ -36,11 +49,11 @@ class StepForm extends Component {
   render(){
     return (
       <div>
-        <input onChange={this.onChangeTitle} value={this.state.title} placeholder="Enter a title for your Step">
+        <TextField onChange={this.onChangeTitle} value={this.state.title} hintText="Enter a title for your Step"/>
 
-        </input>
-
-        <button onClick={this.addItem}>Add Step</button>
+          <FloatingActionButton onClick={this.addItem} style={style} secondary={true} mini={true}>
+          <ContentAdd />
+          </FloatingActionButton>
       </div>
     );
   }
