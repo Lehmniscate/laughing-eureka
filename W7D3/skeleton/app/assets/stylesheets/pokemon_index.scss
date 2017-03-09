@@ -1,0 +1,31 @@
+.all-pokemon {
+  list-style: none;
+  width: 300px;
+}
+
+.all-pokemon a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.all-pokemon li {
+}
+
+.all-pokemon span {
+  margin-left: 15px;
+}
+
+.all-pokemon li:nth-of-type(2n) {
+  background-color: gainsboro;
+}
+.all-pokemon-image {
+  width: 75px;
+  margin: 10px;
+}
+
+.all-pokemon-name {
+  font-size: 28px;
+}
