@@ -1,8 +1,134 @@
+.pokemon-detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 1;
+  min-width: 375px;
+  border-radius: 10px;
+  border: solid black 2px;
+  box-sizing: border-box
+}
+
+.pokemon-detail > div {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 375px;
+  color: black;
+  height: 100%;
+  width: 40%;
+}
+
+.pokemon-detail > div:first-of-type {
+  align-items: center;
+  width: 60%;
+}
+
+.pokemon-detail h1 {
+  font-size: 60px;
+  margin: 0px 0px 30px 0px;
+  border-bottom: 1px solid black;
+}
+
+.pokemon-detail > div {
+  height: 100%;
+  align-items: center;
+  padding: 100px;
+}
+
+.pokemon-detail > div > img {
+  width: 100%;
+  height: 100%;
+}
+
+.pokemon-detail > div > span {
+  margin-top: 7px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 .items {
-  height: 100px;
+  margin: 20px 0px 10px 0px;
+  width: 70%;
+  height: 75px;
   display: flex;
 }
 
 .items img {
-  height: 100px;
+  height: 100%;
+  min-height: 30px;
+  width: 100%;
+  filter: grayscale(75%)
+}
+
+.items img:hover {
+  filter: grayscale(0%);
+  transform: scale(1.2);
+}
+
+.pokemon-information {
+  box-sizing: border-box;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  border: 1px solid gray;
+  font-weight: bold;
+  font-size: 16px;
+  flex-shrink: 0;
+  background-color: lightgray;
+}
+
+.pokemon-stats {
+  box-sizing: border-box;
+  display: inherit;
+  width: 100%;
+}
+
+.pokemon-stats > div {
+  box-sizing: border-box;
+  display: inherit;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 50%;
+  border-bottom: 1px solid gray;
+}
+
+.pokemon-stats > div:first-of-type {
+  box-sizing: border-box;
+  border-right: 1px solid gray;
+}
+
+.pokemon-stats > div > span:first-of-type {
+  box-sizing: border-box;
+  border-bottom: 1px solid gray;
+  display: inherit;
+  width: 100%;
+}
+
+.pokemon-information span {
+  box-sizing: border-box;
+  padding: 6px;
+}
+
+.pokemon-moves {
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  font-weight: normal;
+}
+
+.pokemon-moves div {
+  box-sizing: border-box;
+  padding: 6px;
+  padding-left: 12px;
+  border-top: 1px solid gray;
+}
+
+.pokemon-moves div:first-of-type {
+  border: none;
+  font-weight: bold;
 }
